@@ -3,7 +3,7 @@
         Nueva Persona
     </div>
     <div class="card-body">
-        <form id="form_persona">
+        <form id="form_persona_procesar2">
             <div class="form-group">
                 <label for="cedula">Cedula</label>
                 <input type="text" class="form-control" placeholder="Cedula" name="cedula" id="cedula">

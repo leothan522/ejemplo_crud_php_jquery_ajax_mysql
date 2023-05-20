@@ -1,7 +1,7 @@
 <?php
 // start a session
 session_start();
-require "mysql/Query.php";
+require "database/Query.php";
 require "model/Persona.php";
 
 function crearTdTable($i, $cedula, $nombre, $telefono, $municipio, $parroquia, $id, $editar= false)
@@ -69,7 +69,7 @@ function crearTdTable($i, $cedula, $nombre, $telefono, $municipio, $parroquia, $
     return preg_replace("/[\r\n|\n|\r]+/", " ", $td);;
 }
 
-$data = array();
+$response = array();
 
 if ($_POST){
 
@@ -89,46 +89,60 @@ if ($_POST){
             $id = $_POST['id'];
             $item = $_POST['item'];
 
-            $existe = $persona->existe($cedula, $id);
+            $data = [
+                $cedula,
+                $nombre,
+                $telefono,
+                $municipio,
+                $parroquia
+            ];
+
+            $existe = $persona->existe('cedula', '=', $cedula, $id);
 
             if ($existe){
 
-                $data['result'] = false;
-                $data['icon'] = "warning";
-                $data['existe'] = true;
-                $data['message'] = "Cedula ya registrada.";
+                $response['result'] = false;
+                $response['icon'] = "warning";
+                $response['existe'] = true;
+                $response['message'] = "Cedula ya registrada.";
 
             }else{
 
                 if ($opcion == "guardar"){
-                    $guardar = $persona->save($cedula, $nombre, $telefono, $municipio, $parroquia);
+                    $guardar = $persona->save($data);
                     if ($guardar){
                         $getPersona = $persona->first('cedula', '=', $cedula);
                         $count = $persona->count();
-                        $data['result'] = true;
-                        $data['icon'] = "success";
-                        $data['message'] = "Persona Guardada correctamente.";
-                        $data['item'] = false;
-                        $data['tr'] = crearTdTable($count, $cedula, $nombre, $telefono, $municipio, $parroquia, $getPersona['id']);
+                        $response['result'] = true;
+                        $response['icon'] = "success";
+                        $response['message'] = "Persona Guardada correctamente.";
+                        $response['item'] = false;
+                        $response['tr'] = crearTdTable($count, $cedula, $nombre, $telefono, $municipio, $parroquia, $getPersona['id']);
                     }else{
-                        $data['result'] = false;
-                        $data['icon'] = "error";
-                        $data['message'] = 'Error en el Model Mysql.';
+                        $response['result'] = false;
+                        $response['icon'] = "error";
+                        $response['message'] = 'Error en el Model Mysql.';
                     }
                 }
 
                 if ($opcion == "editar"){
-                    $editar = $persona->save($cedula, $nombre, $telefono, $municipio, $parroquia, $id);
+
+                    $editar = $persona->update($id, 'cedula', $cedula);
+                    $editar = $persona->update($id, 'nombre', $nombre);
+                    $editar = $persona->update($id, 'telefono', $telefono);
+                    $editar = $persona->update($id, 'municipio', $municipio);
+                    $editar = $persona->update($id, 'parroquia', $parroquia);
+
                     if ($editar){
-                        $data['result'] = true;
-                        $data['icon'] = "success";
-                        $data['message'] = "Datos Actualizados.";
-                        $data['item'] = "tr_item_".$id;
-                        $data['tr'] = crearTdTable($item, $cedula, $nombre, $telefono, $municipio, $parroquia, $id, true);
+                        $response['result'] = true;
+                        $response['icon'] = "success";
+                        $response['message'] = "Datos Actualizados.";
+                        $response['item'] = "tr_item_".$id;
+                        $response['tr'] = crearTdTable($item, $cedula, $nombre, $telefono, $municipio, $parroquia, $id, true);
                     }else{
-                        $data['result'] = false;
-                        $data['icon'] = "error";
-                        $data['message'] = 'Error en el Model Mysql.';
+                        $response['result'] = false;
+                        $response['icon'] = "error";
+                        $response['message'] = 'Error en el Model Mysql.';
                     }
                 }
 
@@ -136,9 +150,9 @@ if ($_POST){
 
 
         } else {
-            $data['result'] = false;
-            $data['icon'] = "error";
-            $data['message'] = 'Todos los campos son requeridos.';
+            $response['result'] = false;
+            $response['icon'] = "error";
+            $response['message'] = 'Todos los campos son requeridos.';
         }
 
     }
@@ -149,45 +163,45 @@ if ($_POST){
             $id = $_POST['id'];
             $eliminar = $persona->delete($id);
             if ($eliminar){
-                $data['result'] = true;
-                $data['icon'] = "success";
-                $data['message'] = "Persona Eliminada.";
+                $response['result'] = true;
+                $response['icon'] = "success";
+                $response['message'] = "Persona Eliminada.";
             }else{
-                $data['result'] = false;
-                $data['icon'] = "error";
-                $data['message'] = 'Error en el Model Mysql.';
+                $response['result'] = false;
+                $response['icon'] = "error";
+                $response['message'] = 'Error en el Model Mysql.';
             }
         }else{
-            $data['result'] = false;
-            $data['icon'] = "error";
-            $data['message'] = 'Todos los campos son requeridos.';
+            $response['result'] = false;
+            $response['icon'] = "error";
+            $response['message'] = 'Todos los campos son requeridos.';
         }
     }
 
     if ($opcion == "show"){
         if (!empty($_POST['id'])){
             $id = $_POST['id'];
-            $getPersona = $persona->first('id', '=', $id);
+            $getPersona = $persona->find($id);
             if ($getPersona){
-                $data['result'] = true;
-                $data['id'] = $getPersona['id'];
-                $data['cedula'] = $getPersona['cedula'];
-                $data['nombre'] = $getPersona['nombre'];
-                $data['telefono'] = $getPersona['telefono'];
-                $data['municipio'] = $getPersona['municipio'];
-                $data['parroquia'] = $getPersona['parroquia'];
+                $response['result'] = true;
+                $response['id'] = $getPersona['id'];
+                $response['cedula'] = $getPersona['cedula'];
+                $response['nombre'] = $getPersona['nombre'];
+                $response['telefono'] = $getPersona['telefono'];
+                $response['municipio'] = $getPersona['municipio'];
+                $response['parroquia'] = $getPersona['parroquia'];
             }else{
-                $data['result'] = false;
-                $data['icon'] = "error";
-                $data['message'] = 'Error en el Model Mysql.';
+                $response['result'] = false;
+                $response['icon'] = "error";
+                $response['message'] = 'Error en el Model Mysql.';
             }
         }else{
-            $data['result'] = false;
-            $data['icon'] = "error";
-            $data['message'] = 'Todos los campos son requeridos.';
+            $response['result'] = false;
+            $response['icon'] = "error";
+            $response['message'] = 'Todos los campos son requeridos.';
         }
     }
 
 
-    echo json_encode($data, JSON_UNESCAPED_UNICODE);
+    echo json_encode($response, JSON_UNESCAPED_UNICODE);
 }

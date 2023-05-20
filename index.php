@@ -13,11 +13,17 @@
     <link href="resources/fontawesome/css/fontawesome.css" rel="stylesheet">
     <link href="resources/fontawesome/css/brands.css" rel="stylesheet">
     <link href="resources/fontawesome/css/solid.css" rel="stylesheet">
+
+    <!-- DataTables -->
+    <link rel="stylesheet" href="resources/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="resources/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="resources/datatables-buttons/css/buttons.bootstrap4.min.css">
+
 </head>
 <body>
 
 <div class="container-fluid mt-5">
-    <!-- Content here -->
+    <!-- Tabla Personas -->
     <div class="row justify-content-center">
         <div class="col-11">
             <div class="row">
@@ -30,6 +36,8 @@
             </div>
         </div>
     </div>
+
+
 </div>
 
 
@@ -39,7 +47,21 @@
 <script src="resources/select2/js/select2.full.min.js"></script>
 <script src="resources/select2/js/i18n/es.js"></script>
 <script src="resources/inputmask/jquery.inputmask.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="resources/datatables/jquery.dataTables.min.js"></script>
+<script src="resources/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="resources/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="resources/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="resources/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="resources/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="resources/jszip/jszip.min.js"></script>
+<script src="resources/pdfmake/pdfmake.min.js"></script>
+<script src="resources/pdfmake/vfs_fonts.js"></script>
+<script src="resources/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="resources/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="resources/datatables-buttons/js/buttons.colVis.min.js"></script>
 <script src="js/sweetalert-app.js"></script>
+<script src="js/datatable-app.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

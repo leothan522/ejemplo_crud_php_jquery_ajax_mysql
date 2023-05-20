@@ -2,11 +2,12 @@
 header("Access-Control-Allow-Origin: *");
 date_default_timezone_set('America/Caracas');
 
-class Conexion{
+class Conexion
+{
 
     public $CONEXION;
-    
-    Public function __construct()
+
+    public function __construct()
     {
 
         $db_conexion = "mysql";
@@ -16,7 +17,7 @@ class Conexion{
         $db_username = "root";
         $db_password = "";
         $this->CONEXION = new PDO("$db_conexion:host=$db_host;dbname=$db_database", $db_username, $db_password);
- 
+
     }
 
 

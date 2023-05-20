@@ -1,6 +1,6 @@
 <?php
 session_start();
-require "mysql/Query.php";
+require "database/Query.php";
 require "model/Persona.php";
 
 $persona = new Persona();

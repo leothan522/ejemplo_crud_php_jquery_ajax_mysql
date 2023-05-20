@@ -1,14 +1,9 @@
 <?php
-
-class Persona
+class Model
 {
-    public $TABLA = "personas";
+    public $TABLA = "";
     public $DATA = [
-        'cedula',
-        'nombre',
-        'telefono',
-        'municipio',
-        'parroquia'
+        ''
     ];
 
     /* ****************************************************************************************************************   */
