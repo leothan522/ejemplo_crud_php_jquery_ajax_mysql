@@ -28,7 +28,30 @@
         <div class="col-11">
             <div class="row">
                 <div class="col-9">
-                    <?php require "table.php"; ?>
+                    <div class="card">
+                        <div class="card-header">
+                            Personas Registradas
+                            <div class="card-tools" id="card_tools">
+
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <!-- Loading overlay -->
+                            <div class="card-img-overlay">
+                                <div class="d-flex justify-content-center">
+                                    <div class="spinner-border" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive" id="dataContainer">
+                                <!-- Tabla Personas -->
+                                <?php require "table.php"; ?>
+                                <!-- Display pagination links -->
+                                <?php echo $pagination->createLinks(); ?>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-3">
                     <?php require "form.php"; ?>

@@ -20,6 +20,21 @@ class Model
         return $rows;
     }
 
+    public function paginate($limit, $offset = null, $orderBy = 'id', $opt = 'ASC', $band = null)
+    {
+        $extra = null;
+        if (!is_null($band)) {
+            $extra = "WHERE `band`= $band";
+        }
+        if (!is_null($offset)){
+            $offset = $offset.",";
+        }
+        $query = new Query();
+        $sql = "SELECT * FROM `$this->TABLA` $extra ORDER BY `$orderBy` $opt LIMIT $offset $limit;";
+        $rows = $query->getAll($sql);
+        return $rows;
+    }
+
     public function getList($campo, $operador, $valor, $band = null)
     {
         $extra = null;

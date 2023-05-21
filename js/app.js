@@ -17,6 +17,17 @@ $('#telefono').inputmask({"mask": "(9999) 999-99.99",});
 //Inicializamos la Funcion creada para Datatable pasando el ID de la tabla
 datatable('table_personas');
 
+$('.card-img-overlay').hide();
+// Show loading overlay when ajax request starts
+$( document ).ajaxStart(function() {
+    $('.card-img-overlay').show();
+});
+
+// Hide loading overlay when ajax request completes
+$( document ).ajaxStop(function() {
+    $('.card-img-overlay').hide();
+});
+
 //Procesamos el Formulario
 $('#form_persona_procesar2').submit(function (e) {
     e.preventDefault();

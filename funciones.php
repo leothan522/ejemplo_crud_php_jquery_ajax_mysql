@@ -1,11 +1,11 @@
 <?php
 session_start();
+require "funciones/paginate.php";
 require "database/Query.php";
 require "model/Persona.php";
 
 $persona = new Persona();
-$listarPersonas = $persona->getAll();
-$i = 0;
+
 $listarMunicipios = [
     1 => 'Juan German Roscio',
     2 => 'Ortiz'
@@ -17,3 +17,8 @@ $listarParroquias = [
     ['id' => 4,'nombre' => 'Ortiz', 'municipio' => 2],
     ['id' => 5,'nombre' => 'San Jose de Tiznados', 'municipio' => 2],
 ];
+
+$limit = 5;
+$pagination = paginate('getData.php', 'table_personas', $limit, $persona->count());
+$listarPersonas = $persona->paginate($limit);
+$i = 0;

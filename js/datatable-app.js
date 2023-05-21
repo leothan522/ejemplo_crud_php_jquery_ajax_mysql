@@ -1,13 +1,13 @@
-function datatable (id_selector) {
-    $("#"+ id_selector).DataTable({
+const dataTable  = {
         responsive: true,
-        lengthChange: false,
+            lengthChange: false,
         autoWidth: false,
         buttons: [/*"copy", "csv",*/ "excel", "pdf", "print"/*, "colvis"*/],
         paging: false,
         ordering:  false,
+        info: false,
         language: {
-            processing: "Procesando...",
+        processing: "Procesando...",
             lengthMenu: "Mostrar _MENU_ registros",
             zeroRecords: "No se encontraron resultados",
             emptyTable: "Ningún dato disponible en esta tabla",
@@ -19,33 +19,33 @@ function datatable (id_selector) {
             search: "Buscar:",
             loadingRecords: "Cargando...",
             paginate: {
-                first: "Primero",
+            first: "Primero",
                 previous: "Anterior",
                 next: "Siguiente",
                 last: "Anterior"
-            },
-            aria: {
-                sortAscending: ": Activar para ordenar la columna de manera ascendente",
+        },
+        aria: {
+            sortAscending: ": Activar para ordenar la columna de manera ascendente",
                 sortDescending: ": Activar para ordenar la columna de manera descendente"
-            },
-            buttons: {
-                copy: "Copiar",
+        },
+        buttons: {
+            copy: "Copiar",
                 colvis: "Visibilidad",
                 collection: "Colección",
                 colvisRestore: "Restaurar visibilidad",
                 copyKeys: "Presione ctrl o u2318 + C para copiar los datos de la tabla al portapapeles del sistema. <br /> <br /> Para cancelar, haga clic en este mensaje o presione escape.",
                 copySuccess: {
-                    "1": "Copiada 1 fila al portapapeles",
+                "1": "Copiada 1 fila al portapapeles",
                     "_": "Copiadas %d filas al portapapeles"
-                },
-                copyTitle: "Copiar al portapapeles",
+            },
+            copyTitle: "Copiar al portapapeles",
                 csv: "CSV",
                 excel: "Excel",
                 pageLength: {
-                    "-1": "Mostrar todas las filas",
+                "-1": "Mostrar todas las filas",
                     "_": "Mostrar %d filas"
-                },
-                pdf: "PDF",
+            },
+            pdf: "PDF",
                 print: "Imprimir",
                 renameState: "Cambiar nombre",
                 updateState: "Actualizar",
@@ -54,25 +54,25 @@ function datatable (id_selector) {
                 removeState: "Remover",
                 savedStates: "Estados Guardados",
                 stateRestore: "Estado %d",
-            },
-            autoFill: {
-                cancel: "Cancelar",
+        },
+        autoFill: {
+            cancel: "Cancelar",
                 fill: "Rellene todas las celdas con <i>%d</i>",
                 fillHorizontal: "Rellenar celdas horizontalmente",
                 fillVertical: "Rellenar celdas verticalmentemente"
-            },
-            decimal: ",",
+        },
+        decimal: ",",
             searchBuilder: {
-                add: "Añadir condición",
+            add: "Añadir condición",
                 button: {
-                    "0": "Constructor de búsqueda",
+                "0": "Constructor de búsqueda",
                     "_": "Constructor de búsqueda (%d)"
-                },
-                clearAll: "Borrar todo",
+            },
+            clearAll: "Borrar todo",
                 condition: "Condición",
                 conditions: {
-                    date: {
-                        after: "Despues",
+                date: {
+                    after: "Despues",
                         before: "Antes",
                         between: "Entre",
                         empty: "Vacío",
@@ -80,9 +80,9 @@ function datatable (id_selector) {
                         notBetween: "No entre",
                         notEmpty: "No Vacio",
                         not: "Diferente de"
-                    },
-                    number: {
-                        between: "Entre",
+                },
+                number: {
+                    between: "Entre",
                         empty: "equals",
                         gt: "Mayor a",
                         gte: "Mayor o igual a",
@@ -91,9 +91,9 @@ function datatable (id_selector) {
                         notBetween: "No entre",
                         notEmpty: "No vacío",
                         not: "Diferente de"
-                    },
-                    string: {
-                        contains: "Contiene",
+                },
+                string: {
+                    contains: "Contiene",
                         empty: "Vacío",
                         endsWith: "Termina en",
                         equals: "Igual a",
@@ -103,70 +103,70 @@ function datatable (id_selector) {
                         notContains: "No Contiene",
                         notStartsWith: "No empieza con",
                         notEndsWith: "No termina con"
-                    },
-                    array: {
-                        not: "Diferente de",
+                },
+                array: {
+                    not: "Diferente de",
                         equals: "Igual",
                         empty: "Vacío",
                         contains: "Contiene",
                         notEmpty: "No Vacío",
                         without: "Sin"
-                    }
-                },
-                data: "Data",
+                }
+            },
+            data: "Data",
                 deleteTitle: "Eliminar regla de filtrado",
                 leftTitle: "Criterios anulados",
                 logicAnd: "Y",
                 logicOr: "O",
                 rightTitle: "Criterios de sangría",
                 title: {
-                    "0": "Constructor de búsqueda",
+                "0": "Constructor de búsqueda",
                     "_": "Constructor de búsqueda (%d)"
-                },
-                value: "Valor"
             },
-            searchPanes: {
-                clearMessage: "Borrar todo",
+            value: "Valor"
+        },
+        searchPanes: {
+            clearMessage: "Borrar todo",
                 collapse: {
-                    "0": "Paneles de búsqueda",
+                "0": "Paneles de búsqueda",
                     "_": "Paneles de búsqueda (%d)"
-                },
-                count: "{total}",
+            },
+            count: "{total}",
                 countFiltered: "{shown} ({total})",
                 emptyPanes: "Sin paneles de búsqueda",
                 loadMessage: "Cargando paneles de búsqueda",
                 title: "Filtros Activos - %d",
                 showMessage: "Mostrar Todo",
                 collapseMessage: "Colapsar Todo"
-            },
-            select: {
-                cells: {
-                    "1": "1 celda seleccionada",
+        },
+        select: {
+            cells: {
+                "1": "1 celda seleccionada",
                     "_": "%d celdas seleccionadas"
-                },
-                columns: {
-                    "1": "1 columna seleccionada",
-                    "_": "%d columnas seleccionadas"
-                },
-                rows: {
-                    "1": "1 fila seleccionada",
-                    "_": "%d filas seleccionadas"
-                }
             },
-            thousands: ".",
+            columns: {
+                "1": "1 columna seleccionada",
+                    "_": "%d columnas seleccionadas"
+            },
+            rows: {
+                "1": "1 fila seleccionada",
+                    "_": "%d filas seleccionadas"
+            }
+        },
+        thousands: ".",
             datetime: {
-                previous: "Anterior",
+            previous: "Anterior",
                 next: "Proximo",
                 hours: "Horas",
                 minutes: "Minutos",
                 seconds: "Segundos",
                 unknown: "-",
                 amPm: [
-                    "AM",
-                    "PM"
-                ],
+                "AM",
+                "PM"
+            ],
                 months: {
-                    "0": "Enero",
+                "0": "Enero",
                     "1": "Febrero",
                     "10": "Noviembre",
                     "11": "Diciembre",
@@ -178,64 +178,64 @@ function datatable (id_selector) {
                     "7": "Agosto",
                     "8": "Septiembre",
                     "9": "Octubre"
-                },
-                weekdays: [
-                    "Dom",
-                    "Lun",
-                    "Mar",
-                    "Mie",
-                    "Jue",
-                    "Vie",
-                    "Sab"
-                ]
             },
-            editor: {
-                close: "Cerrar",
+            weekdays: [
+                "Dom",
+                "Lun",
+                "Mar",
+                "Mie",
+                "Jue",
+                "Vie",
+                "Sab"
+            ]
+        },
+        editor: {
+            close: "Cerrar",
                 create: {
-                    button: "Nuevo",
+                button: "Nuevo",
                     title: "Crear Nuevo Registro",
                     submit: "Crear"
-                },
-                edit: {
-                    button: "Editar",
+            },
+            edit: {
+                button: "Editar",
                     title: "Editar Registro",
                     submit: "Actualizar"
-                },
-                remove: {
-                    button: "Eliminar",
+            },
+            remove: {
+                button: "Eliminar",
                     title: "Eliminar Registro",
                     submit: "Eliminar",
                     confirm: {
-                        "_": "¿Está seguro que desea eliminar %d filas?",
+                    "_": "¿Está seguro que desea eliminar %d filas?",
                         "1": "¿Está seguro que desea eliminar 1 fila?"
-                    }
-                },
-                error: {
-                    system: "Ha ocurrido un error en el sistema (<a target=\"\\\" rel=\"\\ nofollow\" href=\"\\\">Más información&lt;\\\/a&gt;).<\/a>"
-                },
-                multi: {
-                    title: "Múltiples Valores",
+                }
+            },
+            error: {
+                system: "Ha ocurrido un error en el sistema (<a target=\"\\\" rel=\"\\ nofollow\" href=\"\\\">Más información&lt;\\\/a&gt;).<\/a>"
+            },
+            multi: {
+                title: "Múltiples Valores",
                     info: "Los elementos seleccionados contienen diferentes valores para este registro. Para editar y establecer todos los elementos de este registro con el mismo valor, hacer click o tap aquí, de lo contrario conservarán sus valores individuales.",
                     restore: "Deshacer Cambios",
                     noMulti: "Este registro puede ser editado individualmente, pero no como parte de un grupo."
-                }
-            },
-            info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+            }
+        },
+        info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
             stateRestore: {
-                button: "Crear",
+            button: "Crear",
                 name: "Nombre:",
                 order: "Clasificación",
                 paging: "Paginación",
                 search: "Busqueda",
                 select: "Seleccionar",
                 columns: {
-                    search: "Búsqueda de Columna",
+                search: "Búsqueda de Columna",
                     visible: "Visibilidad de Columna"
-                },
-                title: "Crear Nuevo Estado",
-                toggleLabel: "Incluir:"
             },
-            emptyError: "El nombre no puede estar vacio",
+            title: "Crear Nuevo Estado",
+                toggleLabel: "Incluir:"
+        },
+        emptyError: "El nombre no puede estar vacio",
             removeConfirm: "¿Seguro que quiere eliminar este %s?",
             removeError: "Error al eliminar el registro",
             removeJoiner: "y",
@@ -246,6 +246,9 @@ function datatable (id_selector) {
             emptyStates: "No hay Estados guardados",
             removeTitle: "Remover Estado",
             renameTitle: "Cambiar Nombre Estado"
-        }
-    }).buttons().container().appendTo('#' + id_selector + '_wrapper .col-md-6:eq(0)');
+    }
+    }
+
+function datatable (id_selector) {
+    $("#"+ id_selector).DataTable(dataTable).buttons().container().appendTo('#' + id_selector + '_wrapper .col-md-6:eq(0)');
 }
