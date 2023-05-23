@@ -1,12 +1,8 @@
 <?php
 class Model
 {
-    public $TABLA = "";
-    public $DATA = [
-        ''
-    ];
-
-    /* ****************************************************************************************************************   */
+    public $TABLA;
+    public $DATA;
 
     public function getAll($band = null)
     {
